@@ -63,9 +63,14 @@ if len(undocked_pdbqt) == len(docked_pdbqt) == len(original_mol2):
                n=n+1
                if coord[2] == coordinates[2]:
                   n=n+1
+            else: 
+               if coord[2] == coordinates[2]:
+                  n=n+1
          if n == 3:
            coord_map.update({idx:ind})
          elif n == 2:
+            coord_map.update({idx:ind})
+         elif n == 1:
             coord_map.update({idx:ind})
          else:
             pass
@@ -78,14 +83,6 @@ if len(undocked_pdbqt) == len(docked_pdbqt) == len(original_mol2):
       mol2.OBMol.DeleteHydrogens()
       for atom in mol2:
          atom.OBAtom.SetVector(coord_conform.get(atom.idx)[0], coord_conform.get(atom.idx)[1], coord_conform.get(atom.idx)[2])
-      mol2.OBMol.SetAromaticPerceived()
-      if mol2.OBMol.Has3D() == True:
-         print 'has3d'
-      if mol2.OBMol.HasAromaticPerceived() == True:
-         print 'ArPer'
-      if mol2.OBMol.HasKekulePerceived() == True:
-         print 'KekPer'
-      mol2.OBMol.AddHydrogens()
       mol2.write('mol2', output_mol2, overwrite=True)
    else:
       print 'Lost coordinates in mapping'
