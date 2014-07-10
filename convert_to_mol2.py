@@ -69,12 +69,17 @@ if len(undocked_pdbqt) == len(docked_pdbqt) == len(original_mol2):
          if n == 3:
            coord_map.update({idx:ind})
          elif n == 2:
-            coord_map.update({idx:ind})
+            if idx in coord_map:
+              pass
+            else:
+              coord_map.update({idx:ind})
          elif n == 1:
-            coord_map.update({idx:ind})
+            if idx in coord_map:
+              pass
+            else:
+              coord_map.update({idx:ind})
          else:
             pass
-
    if len(coord_map) == len(original_mol2):
       coord_conform = {}
       for index1, index2 in coord_map.items():
